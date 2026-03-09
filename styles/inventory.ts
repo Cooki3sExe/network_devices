@@ -1,0 +1,115 @@
+// styles/inventory.ts — Styles specific to the device inventory list page
+
+import React from "react";
+
+export const inventoryStyles: Record<string, React.CSSProperties> = {
+  header: {
+    display: "flex",
+    alignItems: "center",
+    gap: "1rem",
+    marginBottom: "2rem",
+  },
+  title: {
+    fontSize: "2rem",
+    fontWeight: 700,
+    background: "linear-gradient(90deg, #a5b4fc, #818cf8, #6366f1)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    margin: 0,
+  },
+  subtitle: {
+    fontSize: "0.875rem",
+    color: "#64748b",
+    marginTop: "0.25rem",
+  },
+  statsRow: {
+    display: "flex",
+    gap: "1rem",
+    marginBottom: "1.5rem",
+  },
+  statCard: {
+    background: "rgba(255,255,255,0.04)",
+    border: "1px solid rgba(255,255,255,0.08)",
+    borderRadius: "12px",
+    padding: "1rem 1.5rem",
+    minWidth: "140px",
+  },
+  statLabel: {
+    fontSize: "0.75rem",
+    color: "#64748b",
+    textTransform: "uppercase" as const,
+    letterSpacing: "0.08em",
+  },
+  statValue: {
+    fontSize: "1.75rem",
+    fontWeight: 700,
+    color: "#a5b4fc",
+    lineHeight: 1.2,
+  },
+  tableWrapper: {
+    background: "rgba(255,255,255,0.03)",
+    border: "1px solid rgba(255,255,255,0.08)",
+    borderRadius: "16px",
+    overflow: "hidden",
+    boxShadow: "0 25px 50px rgba(0,0,0,0.4)",
+  },
+  table: {
+    width: "100%",
+    borderCollapse: "collapse" as const,
+    fontSize: "0.875rem",
+  },
+  thead: {
+    background: "rgba(99,102,241,0.1)",
+  },
+  th: {
+    padding: "0.875rem 1.25rem",
+    textAlign: "left" as const,
+    fontWeight: 600,
+    fontSize: "0.75rem",
+    textTransform: "uppercase" as const,
+    letterSpacing: "0.08em",
+    color: "#6366f1",
+    borderBottom: "1px solid rgba(255,255,255,0.06)",
+    whiteSpace: "nowrap" as const,
+  },
+  td: {
+    padding: "0.875rem 1.25rem",
+    borderBottom: "1px solid rgba(255,255,255,0.04)",
+    color: "#cbd5e1",
+    verticalAlign: "middle" as const,
+  },
+  tdHostname: {
+    padding: "0.875rem 1.25rem",
+    borderBottom: "1px solid rgba(255,255,255,0.04)",
+    color: "#f1f5f9",
+    fontWeight: 600,
+    verticalAlign: "middle" as const,
+  },
+  tdSerial: {
+    padding: "0.875rem 1.25rem",
+    borderBottom: "1px solid rgba(255,255,255,0.04)",
+    color: "#94a3b8",
+    fontFamily: "monospace",
+    fontSize: "0.8rem",
+    verticalAlign: "middle" as const,
+  },
+  vendorBadge: {
+    display: "inline-block",
+    padding: "0.2rem 0.6rem",
+    borderRadius: "999px",
+    fontSize: "0.75rem",
+    fontWeight: 500,
+    background: "rgba(99,102,241,0.2)",
+    border: "1px solid rgba(99,102,241,0.3)",
+    color: "#a5b4fc",
+  },
+  lastSeenBadge: {
+    display: "inline-block",
+    padding: "0.2rem 0.6rem",
+    borderRadius: "6px",
+    fontSize: "0.75rem",
+    background: "rgba(74,222,128,0.1)",
+    border: "1px solid rgba(74,222,128,0.2)",
+    color: "#4ade80",
+  },
+};

@@ -11,21 +11,28 @@ export function useDeviceDetail(serial: string) {
   const [loadingDevice, setLoadingDevice] = useState(true);
   const [loadingMetrics, setLoadingMetrics] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [tick, setTick] = useState(0);
 
-  useEffect(() => {
+  const loadAll = () => {
     fetchDeviceDetail(serial)
       .then((json) => { setDevice(json); setLoadingDevice(false); })
       .catch((err) => { setError(err.message); setLoadingDevice(false); });
-  }, [serial]);
 
-  useEffect(() => {
     fetchDeviceMetrics(serial, 200)
       .then((json) => {
-        // Reverse so charts read oldest → newest (left → right)
         setMetrics([...json.metrics].reverse());
         setLoadingMetrics(false);
       })
       .catch(() => setLoadingMetrics(false));
+  };
+
+  useEffect(() => {
+    loadAll();
+    const interval = setInterval(() => {
+      loadAll();
+      setTick(t => t + 1);
+    }, 60000); 
+    return () => clearInterval(interval);
   }, [serial]);
 
   const loading = loadingDevice || loadingMetrics;

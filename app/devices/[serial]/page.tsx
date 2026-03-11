@@ -40,7 +40,7 @@ export default function DeviceDetailPage() {
         {/* Content — only rendered when both fetches are done */}
         {!loading && device && (
           <>
-            <DeviceInfoCard device={device} />
+            <DeviceInfoCard device={device} latestMetric={metrics[metrics.length - 1]} />
             <CpuChart metrics={metrics} />
             <RamChart metrics={metrics} />
             <DiskChart metrics={metrics} />

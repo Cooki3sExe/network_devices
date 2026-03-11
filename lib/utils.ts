@@ -1,10 +1,12 @@
 // lib/utils.ts — Shared helper functions
 
-/** Converts KB to a human-readable string (e.g. "23.7 MB"). Returns "—" if null. */
+/** Converts KB to a human-readable string (e.g. "1.3 GB"). Returns "—" if null. */
 export function formatBytes(kb: number | null): string {
   if (kb === null) return "—";
   if (kb < 1024) return `${kb} KB`;
-  return `${(kb / 1024).toFixed(1)} MB`;
+  const mb = kb / 1024;
+  if (mb < 1024) return `${mb.toFixed(1)} MB`;
+  return `${(mb / 1024).toFixed(1)} GB`;
 }
 
 /** Formats a timestamp string to HH:MM:SS for compact chart axis labels. */

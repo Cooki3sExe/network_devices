@@ -20,7 +20,6 @@ export interface MetricRecord {
   timestamp: string;
   cpu_load: number | null;
   ram_used: number | null;
-  disk_used: number | null;
   uptime: number | null;
   ip_address: string | null;
 }

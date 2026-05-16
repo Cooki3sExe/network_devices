@@ -44,7 +44,6 @@ export default function MetricsTable({ metrics }: Props) {
                   <th style={S.th}>IP Address</th>
                   <th style={S.th}>CPU Load</th>
                   <th style={S.th}>RAM Used</th>
-                  <th style={S.th}>Disk Used</th>
                   <th style={S.th}>Uptime</th>
                 </tr>
               </thead>
@@ -59,7 +58,6 @@ export default function MetricsTable({ metrics }: Props) {
                     <td style={S.tdMono}>{m.ip_address ?? "—"}</td>
                     <td style={S.tdMono}>{m.cpu_load ?? "—"}%</td>
                     <td style={S.tdMono}>{formatBytes(m.ram_used)}</td>
-                    <td style={S.tdMono}>{formatBytes(m.disk_used)}</td>
                     <td style={S.tdMono}>{formatUptime(m.uptime)}</td>
                   </tr>
                 ))}

@@ -13,7 +13,7 @@ import DeviceInfoCard from "@/components/device/DeviceInfoCard";
 // Recharts components must be loaded client-side only (no SSR)
 const CpuChart = dynamic(() => import("@/components/device/CpuChart"), { ssr: false });
 const RamChart = dynamic(() => import("@/components/device/RamChart"), { ssr: false });
-const DiskChart = dynamic(() => import("@/components/device/DiskChart"), { ssr: false });
+
 const UptimeChart = dynamic(() => import("@/components/device/UptimeChart"), { ssr: false });
 const MetricsTable = dynamic(() => import("@/components/device/MetricsTable"), { ssr: false });
 
@@ -43,7 +43,7 @@ export default function DeviceDetailPage() {
             <DeviceInfoCard device={device} latestMetric={metrics[metrics.length - 1]} />
             <CpuChart metrics={metrics} />
             <RamChart metrics={metrics} />
-            <DiskChart metrics={metrics} />
+
             <UptimeChart metrics={metrics} />
             <MetricsTable metrics={metrics} />
           </>

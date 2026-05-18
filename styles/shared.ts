@@ -5,9 +5,7 @@ import React from "react";
 export const shared: Record<string, React.CSSProperties> = {
   page: {
     minHeight: "100vh",
-    background: "linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%)",
     fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
-    color: "#e2e8f0",
     padding: "2rem",
   },
   card: {
@@ -81,10 +79,40 @@ export const shared: Record<string, React.CSSProperties> = {
 /** Inject once per page inside a <style> tag */
 export const globalStyles = `
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  
+  :root {
+    --bg-gradient: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+    --card-bg: rgba(255,255,255,0.03);
+    --card-border: rgba(255,255,255,0.08);
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --accent: #6366f1;
+    --accent-light: #a5b4fc;
+    --success: #4ade80;
+    --danger: #f87171;
+  }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg-gradient);
+    color: var(--text-primary);
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+  }
+
   @keyframes spin { to { transform: rotate(360deg); } }
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  
   ::-webkit-scrollbar { height: 6px; width: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.4); border-radius: 3px; }
+
+  /* Responsive Utilities */
+  @media (max-width: 768px) {
+    .responsive-page { padding: 1rem !important; }
+    .responsive-header { flex-direction: column; align-items: flex-start !important; gap: 1rem; }
+    .responsive-stats { grid-template-columns: 1fr 1fr !important; }
+    .responsive-card { padding: 1rem !important; }
+    .responsive-table-wrapper { overflow-x: auto; }
+  }
 `;

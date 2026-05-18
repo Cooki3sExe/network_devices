@@ -1,10 +1,12 @@
 "use client";
 // components/device/DeviceInfoCard.tsx — Static identity info grid for a network device
 
+import { useState } from "react";
 import { NetworkDevice, MetricRecord } from "@/types";
 import { deviceStyles as S } from "@/styles/device";
 import { shared } from "@/styles/shared";
 import { formatBytes, formatUptime, isRecent, formatTimeAgo } from "@/lib/utils";
+import { API_BASE, API_HEADERS } from "@/lib/api";
 
 interface Props {
   device: NetworkDevice;
@@ -14,6 +16,30 @@ interface Props {
 export default function DeviceInfoCard({ device, latestMetric }: Props) {
   const online = isRecent(device.last_seen);
   const timeAgo = formatTimeAgo(device.last_seen);
+
+  const [pinging, setPinging] = useState(false);
+  const [pingResult, setPingResult] = useState<{ alive: boolean, message: string } | null>(null);
+
+  const handlePing = async () => {
+    setPinging(true);
+    setPingResult(null);
+    try {
+      const res = await fetch(`${API_BASE}/devices/${device.serial_number}/ping`, { 
+        method: "POST",
+        headers: API_HEADERS
+      });
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.detail || "Error en ping");
+      }
+      const data = await res.json();
+      setPingResult({ alive: data.alive, message: data.message });
+    } catch (e: any) {
+      setPingResult({ alive: false, message: e.message });
+    } finally {
+      setPinging(false);
+    }
+  };
 
   const fields = [
     { label: "IP Address",     value: latestMetric?.ip_address ?? "—", mono: true },
@@ -62,6 +88,45 @@ export default function DeviceInfoCard({ device, latestMetric }: Props) {
           }}>
             {online ? "ONLINE" : "OFFLINE"} — {timeAgo}
           </span>
+        </div>
+        
+        {/* Botón Ping Interactivo */}
+        <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          {pingResult && (
+            <span style={{ fontSize: "0.8rem", color: pingResult.alive ? "#4ade80" : "#f87171" }}>
+              {pingResult.alive ? "✅ Responde" : "❌ No responde"}
+            </span>
+          )}
+          <button
+            onClick={handlePing}
+            disabled={pinging || !latestMetric?.ip_address}
+            title={!latestMetric?.ip_address ? "IP no disponible" : "Verificar conexión ahora"}
+            style={{
+              background: pinging ? "rgba(99,102,241,0.2)" : "rgba(99,102,241,0.15)",
+              border: "1px solid rgba(99,102,241,0.4)",
+              color: "#a5b4fc",
+              padding: "0.4rem 0.8rem",
+              borderRadius: "8px",
+              cursor: pinging || !latestMetric?.ip_address ? "not-allowed" : "pointer",
+              fontSize: "0.8rem",
+              fontWeight: 600,
+              display: "flex",
+              alignItems: "center",
+              gap: "0.4rem",
+              transition: "background 0.2s"
+            }}
+          >
+            {pinging ? (
+              <>
+                <span style={{
+                  display: "inline-block", width: "12px", height: "12px",
+                  border: "2px solid rgba(165,180,252,0.3)", borderTopColor: "#a5b4fc",
+                  borderRadius: "50%", animation: "spin 0.8s linear infinite"
+                }} />
+                Pinging...
+              </>
+            ) : "📡 Hacer Ping"}
+          </button>
         </div>
       </div>
 

@@ -30,7 +30,7 @@ export function formatUptime(ticks: number | null): string {
 }
 
 /** Returns true if the timestamp is within the last X minutes. */
-export function isRecent(timestamp: string | null, minutes = 30): boolean {
+export function isRecent(timestamp: string | null, minutes = 5): boolean {
   if (!timestamp) return false;
   const lastSeen = new Date(timestamp);
   const now = new Date();

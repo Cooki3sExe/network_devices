@@ -11,9 +11,7 @@ import ErrorBox from "@/components/ui/ErrorBox";
 import DeviceInfoCard from "@/components/device/DeviceInfoCard";
 
 // Recharts components must be loaded client-side only (no SSR)
-const CpuChart = dynamic(() => import("@/components/device/CpuChart"), { ssr: false });
-const RamChart = dynamic(() => import("@/components/device/RamChart"), { ssr: false });
-
+const UnifiedChart = dynamic(() => import("@/components/device/UnifiedChart"), { ssr: false });
 const UptimeChart = dynamic(() => import("@/components/device/UptimeChart"), { ssr: false });
 const MetricsTable = dynamic(() => import("@/components/device/MetricsTable"), { ssr: false });
 
@@ -27,7 +25,7 @@ export default function DeviceDetailPage() {
   return (
     <>
       <style>{globalStyles + `tr:hover td { background: rgba(99,102,241,0.05) !important; }`}</style>
-      <div style={shared.page}>
+      <div style={shared.page} className="responsive-page">
 
         <button style={S.backBtn} onClick={() => router.push("/")}>
           ← Volver al inventario
@@ -41,9 +39,7 @@ export default function DeviceDetailPage() {
         {!loading && device && (
           <>
             <DeviceInfoCard device={device} latestMetric={metrics[metrics.length - 1]} />
-            <CpuChart metrics={metrics} />
-            <RamChart metrics={metrics} />
-
+            <UnifiedChart metrics={metrics} />
             <UptimeChart metrics={metrics} />
             <MetricsTable metrics={metrics} />
           </>

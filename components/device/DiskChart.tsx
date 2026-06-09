@@ -17,7 +17,7 @@ interface Props {
 export default function DiskChart({ metrics }: Props) {
   const diskData = metrics.map((m) => ({
     time: shortTimestamp(m.timestamp),
-    Disco: m.disk_used !== null ? parseFloat((m.disk_used / 1024).toFixed(1)) : 0,
+    Disco: (m.disk_used !== null && m.disk_used !== undefined) ? parseFloat((m.disk_used / 1024).toFixed(1)) : 0,
   }));
 
   // Dynamic Y-axis domain with padding

@@ -22,6 +22,7 @@ export interface MetricRecord {
   ram_used: number | null;
   uptime: number | null;
   ip_address: string | null;
+  disk_used?: number | null;
 }
 
 export interface DevicesResponse {

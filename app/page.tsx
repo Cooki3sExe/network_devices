@@ -108,7 +108,7 @@ export default function Home() {
           <ErrorBox
             title="Error al conectar con la API"
             detail={error}
-            hint="Verifica que el servidor FastAPI esté corriendo en http://localhost:8000"
+            hint="Verifica que el servidor FastAPI esté corriendo en https://2.25.175.103:8443"
           />
         )}
 

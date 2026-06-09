@@ -2,7 +2,7 @@
 
 import { DevicesResponse, NetworkDevice, MetricsResponse } from "@/types";
 
-export const API_BASE = "http://localhost:8000";
+export const API_BASE = "https://2.25.175.103:8443";
 
 // ngrok-skip-browser-warning needed when tunneling via ngrok
 export const API_HEADERS = { 
